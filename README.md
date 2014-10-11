@@ -33,5 +33,8 @@ DEADLOCK<br>
 -- one solution to the problem would be to provide a global lock object this would solve the deadlock problem but again not ideal<br>
 -- what if I use the account id to enforce a lock order? This would prevent the deadlock<br>
 
+Another completely different approach which I implemented is using Multiverse's implementation of transactions. Using STM instead of locks ensures 
+atomic behavior and prevents deadlocks. 
+
 
     

@@ -8,9 +8,9 @@ public class Main {
         LockAccount sourceLockAccount = new LockAccount(1L, 100);
         LockAccount destinationLockAccount = new LockAccount(2L, 80);
 
-        Thread t1 = new Thread(new AccountRunnable(sourceLockAccount, destinationLockAccount, 10, "Thread1"));
-        Thread t2 = new Thread(new AccountRunnable(destinationLockAccount, sourceLockAccount, 20, "Thread2"));
-        Thread t3 = new Thread(new AccountRunnable(destinationLockAccount, sourceLockAccount, 5, "Thread3"));
+        Thread t1 = new Thread(new AccountRunnable<LockAccount>(sourceLockAccount, destinationLockAccount, 10, "Thread1"));
+        Thread t2 = new Thread(new AccountRunnable<LockAccount>(destinationLockAccount, sourceLockAccount, 20, "Thread2"));
+        Thread t3 = new Thread(new AccountRunnable<LockAccount>(destinationLockAccount, sourceLockAccount, 5, "Thread3"));
 
         t1.start();
         t2.start();
@@ -31,9 +31,9 @@ public class Main {
         TransactionalAccount sourceTxnAccount = new TransactionalAccount(1L, 100);
         TransactionalAccount destTxnAccount = new TransactionalAccount(2L, 80);
 
-        t1 = new Thread(new AccountRunnable(sourceTxnAccount, destTxnAccount, 10, "Thread1"));
-        t2 = new Thread(new AccountRunnable(destTxnAccount, sourceTxnAccount, 20, "Thread2"));
-        t3 = new Thread(new AccountRunnable(destTxnAccount, sourceTxnAccount, 5, "Thread3"));
+        t1 = new Thread(new AccountRunnable<TransactionalAccount>(sourceTxnAccount, destTxnAccount, 10, "Thread1"));
+        t2 = new Thread(new AccountRunnable<TransactionalAccount>(destTxnAccount, sourceTxnAccount, 20, "Thread2"));
+        t3 = new Thread(new AccountRunnable<TransactionalAccount>(destTxnAccount, sourceTxnAccount, 5, "Thread3"));
 
         t1.start();
         t2.start();

@@ -1,17 +1,17 @@
 package com.assignment;
 
 /**
- * Bank Account class
+ * Bank Account class using ordered locks
  * Created by saba on 2014-10-11.
  */
-public class Account {
+public class LockAccount implements BankAccount<LockAccount> {
     private Long id;
 
     //mutable state, yay
     private int availableFunds;
 
     //Constructor
-    public Account(long accountId, int accountAmount) {
+    public LockAccount(long accountId, int accountAmount) {
         setId(accountId);
         setAvailableFunds(accountAmount);
     }
@@ -47,7 +47,7 @@ public class Account {
         availableFunds += amount;
     }
 
-    private int compareAccountIds(Account destination) {
+    private int compareAccountIds(LockAccount destination) {
         return this.id.compareTo(destination.id);
     }
 
@@ -61,8 +61,8 @@ public class Account {
      * @param destination destination account
      * @param amount amount of money to transfer
      */
-    public void transferFunds(Account destination, int amount) {
-        Account sourceLock, destLock;
+    public void transferFunds(final LockAccount destination, int amount) {
+        LockAccount sourceLock, destLock;
 
         int result = compareAccountIds(destination);
         //destination account id is greater than source account id
